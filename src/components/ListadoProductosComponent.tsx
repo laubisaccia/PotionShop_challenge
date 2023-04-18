@@ -16,19 +16,20 @@ export const ListadoProductosComponent = () => {
       return [];
     }
   };
+
+  const fetchData = async () => {
+    const productosData = await getProductos();
+    setProductos(productosData);
+  };
+
   useEffect(() => {
-    async function fetchData() {
-      const productosData = await getProductos();
-      setProductos(productosData);
-    }
     fetchData();
   }, []);
 
-  //console.log(productos);
   return (
     <div className="grid grid-cols-2 gap-y-2 gap-x-10">
       {productos.map((producto) => (
-        <TarjetaProductoComponent producto={producto} />
+        <TarjetaProductoComponent key={producto.id} {...producto} />
       ))}
     </div>
   );
